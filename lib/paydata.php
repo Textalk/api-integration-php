@@ -111,7 +111,7 @@ class PayData {
     }
 
     public function setGuaranteeOffered($guaranteeOffered) {
-        $this-$guaranteeOffered= $guaranteeOffered;
+        $this->$guaranteeOffered = $guaranteeOffered;
     }
 
     public function getOutput(){
