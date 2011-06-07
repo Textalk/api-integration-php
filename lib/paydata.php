@@ -110,6 +110,10 @@ class PayData {
         $this->trackingId = $trackingId;
     }
 
+    public function setGuaranteeOffered($guaranteeOffered) {
+        $this-$guaranteeOffered= $guaranteeOffered;
+    }
+
     public function getOutput(){
         $output = array();
 
