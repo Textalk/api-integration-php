@@ -111,7 +111,7 @@ class PayData {
     }
 
     public function setGuaranteeOffered($guaranteeOffered) {
-        $this->$guaranteeOffered = $guaranteeOffered;
+        $this->guaranteeOffered = $guaranteeOffered;
     }
 
     public function getOutput(){
@@ -158,7 +158,7 @@ class PayData {
         }
 
         if(isset($this->guaranteeOffered)){
-            $output["guaranteeOffered"] = $this->guaranteeOffered;
+            $output["guaranteeOffered"] = GuaranteeOffered::ConstantToString($this->guaranteeOffered);
         }
 
         return $output;

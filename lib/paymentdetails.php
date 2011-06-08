@@ -13,6 +13,7 @@ class PaymentDetails {
     protected $type;
     protected $currencyCode;
     protected $custom;
+    protected $trackingId;
     protected $correlationId;
     protected $purchaseId;
     protected $senderEmail;
@@ -41,6 +42,7 @@ class PaymentDetails {
 
         $this->currencyCode = $responseData["currencyCode"];
         $this->custom = $responseData["custom"];
+        $this->trackingId = $responseData["trackingId"];
         $this->correlationId = $responseData["correlationId"];
         $this->purchaseId = $responseData["purchaseId"];
 
@@ -106,7 +108,16 @@ class PaymentDetails {
      * @return string
      */
     public function getCustom() {
-        return $this->Custom;
+        return $this->custom;
+    }
+
+    /**
+     * Get trackingId field of the payment
+     *
+     * @return string
+     */
+    public function getTrackingId() {
+        return $this->trackingId;
     }
 
     /**

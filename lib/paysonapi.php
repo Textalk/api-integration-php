@@ -122,6 +122,23 @@ class FundingConstraint {
     }
 }
 
+class GuaranteeOffered {
+    const OPTIONAL = 0;
+    const REQUIRED = 1;
+    const NO = 2;
+
+    public static function ConstantToString($value) {
+        switch ($value) {
+            case self::OPTIONAL:
+                return "OPTIONAL";
+            case self::REQUIRED:
+                return "REQUIRED";
+            case self::NO:
+                return "NO";
+        }
+    }
+}
+
 class PaysonApi {
 
     protected $credentials;

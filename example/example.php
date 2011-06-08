@@ -44,7 +44,7 @@ $ipnUrl = "http://localhost/ipn.php";
 $receiver = new Receiver(
     "<your payson account>", // The email of the account to receive the money
     100); // The amount you want to charge the user, here in SEK (the default currency)
-$receivers = array();
+$receivers = array($receiver);
 
 // Details about the user that is the sender of the money
 $sender = new Sender("<sender email", "<sender firstname", "<sender lastname>");
@@ -52,6 +52,9 @@ $sender = new Sender("<sender email", "<sender firstname", "<sender lastname>");
 print("\nPay:\n");
 
 $payData = new PayData($returnUrl, $cancelUrl, $ipnUrl, "description", $sender, $receivers);
+
+// Set guarantee options
+$payData.setGuaranteeOffered(GuaranteeOffered::OPTIONAL);
 
 /*
  * Step 2 initiate payment
