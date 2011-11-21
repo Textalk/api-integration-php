@@ -1,6 +1,6 @@
 <?php
 
-class PaymentUpdateData {
+class PaysonApi_PaymentUpdateData {
     protected $token;
     protected $method;
 
@@ -13,7 +13,7 @@ class PaymentUpdateData {
         $output = array();
 
         $output["token"] = $this->token;
-        $output["action"] = PaymentUpdateMethod::ConstantToString($this->method);
+        $output["action"] = PaysonApi_PaymentUpdateMethod::ConstantToString($this->method);
 
         return $output;
     }

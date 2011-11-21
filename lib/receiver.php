@@ -1,6 +1,6 @@
 <?php
 
-class Receiver {
+class PaysonApi_Receiver {
 
     protected $email;
     protected $amount;
@@ -35,7 +35,7 @@ class Receiver {
 
         $i = 0;
         while(isset($data[sprintf(self::FORMAT_STRING, $i, "email")])) {
-            $receivers[$i] = new Receiver(
+            $receivers[$i] = new PaysonApi_Receiver(
                 $data[sprintf(self::FORMAT_STRING, $i, "email")],
                 $data[sprintf(self::FORMAT_STRING, $i, "amount")]);
             $i++;

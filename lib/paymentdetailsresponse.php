@@ -5,13 +5,13 @@ require_once "orderitem.php";
 require_once "receiver.php";
 require_once "paymentdetails.php";
 
-class PaymentDetailsResponse {
+class PaysonApi_PaymentDetailsResponse {
     protected $responseEnvelope;
     protected $paymentDetails;
 
     public function __construct($responseData) {
-        $this->responseEnvelope = new ResponseEnvelope($responseData);
-        $this->paymentDetails = new PaymentDetails($responseData);
+        $this->responseEnvelope = new PaysonApi_ResponseEnvelope($responseData);
+        $this->paymentDetails = new PaysonApi_PaymentDetails($responseData);
     }
 
     public function getResponseEnvelope() {

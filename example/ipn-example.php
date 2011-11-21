@@ -8,7 +8,7 @@ require '../lib/paysonapi.php';
 $postData = file_get_contents("php://input");
 
 // Set up API
-$credentials = new PaysonCredentials("<your api userid>", "<your api password>");
+$credentials = new PaysonApi_Credentials("<your api userid>", "<your api password>");
 $api = new PaysonApi($credentials);
 
 // Validate the request

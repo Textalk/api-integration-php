@@ -2,12 +2,12 @@
 
 require_once "paymentdetails.php";
 
-class ValidateResponse {
+class PaysonApi_ValidateResponse {
     protected $response;
     protected $paymentDetails;
 
     public function __construct($paymentDetails, $responseData) {
-        $this->paymentDetails = new PaymentDetails($paymentDetails);
+        $this->paymentDetails = new PaysonApi_PaymentDetails($paymentDetails);
 
         $this->response = $responseData;
     }

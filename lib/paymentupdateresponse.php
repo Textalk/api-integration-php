@@ -2,11 +2,11 @@
 
 require_once "responseenvelope.php";
 
-class PaymentUpdateResponse {
+class PaysonApi_PaymentUpdateResponse {
     protected $responseEnvelope;
 
     public function __construct($responseData) {
-        $this->responseEnvelope = new ResponseEnvelope($responseData);
+        $this->responseEnvelope = new PaysonApi_ResponseEnvelope($responseData);
     }
 
     public function getResponseEnvelope() {

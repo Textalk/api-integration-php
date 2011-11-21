@@ -1,5 +1,5 @@
 <?php
-class Sender {
+class PaysonApi_Sender {
     protected $email;
     protected $firstName;
     protected $lastName;

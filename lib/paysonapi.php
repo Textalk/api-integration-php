@@ -13,7 +13,7 @@ require_once "paydata.php";
 require_once "paymentdetailsdata.php";
 require_once "paymentupdatedata.php";
 
-class PaymentUpdateMethod {
+class PaysonApi_PaymentUpdateMethod {
     const CancelOrder = 0;
     const ShipOrder = 1;
     const CreditOrder = 2;
@@ -30,12 +30,12 @@ class PaymentUpdateMethod {
             case self::Refund:
                 return "REFUND";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_Exception("Invalid constant");
         }
     }
 }
 
-class LocaleCode {
+class PaysonApi_LocaleCode {
     const SV = 0;
     const FI = 1;
     const EN = 2;
@@ -49,12 +49,12 @@ class LocaleCode {
             case self::EN:
                 return "EN";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_Exception("Invalid constant");
         }
     }
 }
 
-class CurrencyCode {
+class PaysonApi_CurrencyCode {
     const SEK = 0;
     const EUR = 1;
 
@@ -65,12 +65,12 @@ class CurrencyCode {
             case self::EUR:
                 return "EUR";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_Exception("Invalid constant");
         }
     }
 }
 
-class FeesPayer {
+class PaysonApi_FeesPayer {
     const SENDER = 0;
     const PRIMARYRECEIVER = 1;
     const EACHRECEIVER = 2;
@@ -87,12 +87,12 @@ class FeesPayer {
             case self::SECONDARYONLY:
                 return "SECONDARYONLY";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_Exception("Invalid constant");
         }
     }
 }
 
-class FundingConstraint {
+class PaysonApi_FundingConstraint {
     const NONE = 0;
     const CREDITCARD = 1;
     const BANK = 2;
@@ -122,7 +122,7 @@ class FundingConstraint {
     }
 }
 
-class GuaranteeOffered {
+class PaysonApi_GuaranteeOffered {
     const OPTIONAL = 0;
     const REQUIRED = 1;
     const NO = 2;
@@ -156,11 +156,11 @@ class PaysonApi {
     /**
      * Sets up the PaysonAPI with credentials
      *
-     * @param PaysonCredentials $credentials
+     * @param PaysonApi_Credentials $credentials
      */
     public function __construct($credentials){
-        if(get_class($credentials) != "PaysonCredentials") {
-            throw new PaysonApiException("Parameter must be of type PaysonCredentials");
+        if(get_class($credentials) != "PaysonApi_Credentials") {
+            throw new PaysonApi_Exception("Parameter must be of type PaysonApi_Credentials");
         }
         $this->credentials = $credentials;
     }
@@ -174,7 +174,7 @@ class PaysonApi {
     public function pay($payData)
     {
         $input = $payData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION, self::PAYSON_API_PAY_ACTION);
 
@@ -182,7 +182,7 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
         return new PayResponse($decoded);
     }
@@ -201,9 +201,9 @@ class PaysonApi {
                                        $this->credentials,
                                        $data);
 
-        $decoded = NVPCodec::Decode($data);
+        $decoded = PaysonApi_NVPCodec::Decode($data);
 
-        return new ValidateResponse($decoded, $returnData);
+        return new PaysonApi_ValidateResponse($decoded, $returnData);
     }
 
     /**
@@ -215,7 +215,7 @@ class PaysonApi {
     public function paymentDetails($paymentDetailsData)
     {
         $input = $paymentDetailsData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION, self::PAYSON_API_PAYMENT_DETAILS_ACTION);
 
@@ -223,9 +223,9 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PaymentDetailsResponse($decoded);
+        return new PaysonApi_PaymentDetailsResponse($decoded);
     }
 
     /**
@@ -237,7 +237,7 @@ class PaysonApi {
     public function paymentUpdate($paymentUpdateData)
     {
         $input = $paymentUpdateData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION, self::PAYSON_API_PAYMENT_UPDATE_ACTION);
 
@@ -245,14 +245,14 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PaymentUpdateResponse($decoded);
+        return new PaysonApi_PaymentUpdateResponse($decoded);
     }
 
     public function sendIpn($token){
         $input["token"] = $token;
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
         $action = "/1.0/SendIPN/";
 
         $this->doRequest($action,
@@ -277,7 +277,7 @@ class PaysonApi {
             return  $output;
 		}
 
-        throw new PaysonApiException("Curl not installed.");
+        throw new PaysonApi_Exception("Curl not installed.");
     }
 
     private function doCurlRequest($url, $credentials, $postData) {
@@ -303,7 +303,7 @@ class PaysonApi {
             return $result;
         }
         else {
-            throw new PaysonApiException("Remote host responded with HTTP response code: " . $response_code);
+            throw new PaysonApi_Exception("Remote host responded with HTTP response code: " . $response_code);
         }
     }
 }

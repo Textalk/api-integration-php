@@ -2,12 +2,12 @@
 
 require_once "responseenvelope.php";
 
-class PayResponse {
+class PaysonApi_PayResponse {
     protected $responseEnvelope;
     protected $token;
 
     public function __construct($responseData) {
-        $this->responseEnvelope = new ResponseEnvelope($responseData);
+        $this->responseEnvelope = new PaysonApi_ResponseEnvelope($responseData);
 
         if(isset($responseData["TOKEN"])){
             $this->token = $responseData["TOKEN"];

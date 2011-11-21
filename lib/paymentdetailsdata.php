@@ -1,6 +1,6 @@
 <?php
 
-class PaymentDetailsData {
+class PaysonApi_PaymentDetailsData {
     protected $token;
 
     public function __construct($token){
@@ -17,4 +17,4 @@ class PaymentDetailsData {
 }
 
 ?>
- 
+

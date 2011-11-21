@@ -1,6 +1,6 @@
 <?php
 
-class PaysonApiError {
+class PaysonApi_Error {
     protected $errorId;
     protected $message;
     protected $parameter;

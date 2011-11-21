@@ -19,7 +19,7 @@ ini_set("display_errors", 1);
 require_once '../lib/paysonapi.php';
 
 /* Every interaction with Payson goes through the PaysonApi object which you set up as follows */
-$credentials = new PaysonCredentials("<your api userid>", "<your api password>");
+$credentials = new PaysonApi_Credentials("<your api userid>", "<your api password>");
 $api = new PaysonApi($credentials);
 
 /*
@@ -41,20 +41,20 @@ $cancelUrl = "http://localhost/cancel.php";
 $ipnUrl = "http://localhost/ipn.php";
 
 // Details about the receiver
-$receiver = new Receiver(
+$receiver = new PaysonApi_Receiver(
     "<your payson account>", // The email of the account to receive the money
     100); // The amount you want to charge the user, here in SEK (the default currency)
 $receivers = array($receiver);
 
 // Details about the user that is the sender of the money
-$sender = new Sender("<sender email", "<sender firstname", "<sender lastname>");
+$sender = new PaysonApi_Sender("<sender email", "<sender firstname", "<sender lastname>");
 
 print("\nPay:\n");
 
-$payData = new PayData($returnUrl, $cancelUrl, $ipnUrl, "description", $sender, $receivers);
+$payData = new PaysonApi_PayData($returnUrl, $cancelUrl, $ipnUrl, "description", $sender, $receivers);
 
 // Set guarantee options
-$payData.setGuaranteeOffered(GuaranteeOffered::OPTIONAL);
+$payData.setGuaranteeOffered(PaysonApi_GuaranteeOffered::OPTIONAL);
 
 /*
  * Step 2 initiate payment

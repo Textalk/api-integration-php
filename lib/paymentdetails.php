@@ -1,6 +1,6 @@
 <?php
 
-class PaymentDetails {
+class PaysonApi_PaymentDetails {
     protected $orderItems;
     protected $receivers;
     protected $token;
@@ -19,8 +19,8 @@ class PaymentDetails {
     protected $senderEmail;
 
     public function __construct($responseData) {
-        $this->orderItems = OrderItem::parseOrderItems($responseData);
-        $this->receivers = Receiver::parseReceivers($responseData);
+        $this->orderItems = PaysonApi_OrderItem::parseOrderItems($responseData);
+        $this->receivers = PaysonApi_Receiver::parseReceivers($responseData);
 
         $this->token = $responseData["token"];
 
@@ -200,4 +200,4 @@ class PaymentDetails {
 }
 
 ?>
- 
+

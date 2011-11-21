@@ -2,15 +2,15 @@
 /*
  * Container class for credentials used to log in via Payson API.
  */
-class PaysonCredentials {
+class PaysonApi_Credentials {
     protected $userId;
     protected $password;
     protected $applicationId;
 
     /**
-     * Sets up a PaysonCredential object
+     * Sets up a PaysonApi_Credentials object
      *
-     * @param  string $userId API user id 
+     * @param  string $userId API user id
      * @param  string $password API password
      * @param null $applicationId
      */

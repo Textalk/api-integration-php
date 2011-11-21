@@ -4,7 +4,7 @@
  * Encodes a name value pair collection to a string of format 'name1=value1&name2=value2',
  * suitable to send as a querystring.
  */
-class NVPCodec {
+class PaysonApi_NVPCodec {
     /*
      * Returns NVP encoded string of all entries in input array
      */

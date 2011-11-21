@@ -1,6 +1,6 @@
 <?php
 
-class ResponseEnvelope {
+class PaysonApi_ResponseEnvelope {
     protected $ack;
     protected $timestamp;
     protected $version;
@@ -32,7 +32,7 @@ class ResponseEnvelope {
 
         $i = 0;
         while(isset($output[sprintf("errorList.error(%d).message", $i)])){
-            $errors[$i] = new PaysonApiError(
+            $errors[$i] = new PaysonApi_Error(
                 $output[sprintf("errorList.error(%d).errorId", $i)],
                 $output[sprintf("errorList.error(%d).message", $i)],
                     isset($output[sprintf("errorList.error(%d).parameter", $i)]) ?

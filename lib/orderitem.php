@@ -1,6 +1,6 @@
 <?php
 
-class OrderItem {
+class PaysonApi_OrderItem {
 
     protected $description;
     protected $unitPrice;
@@ -34,7 +34,7 @@ class OrderItem {
     public function getUnitPrice(){
         return $this->unitPrice;
     }
-    
+
     public function getQuantity(){
         return $this->quantity;
     }
@@ -57,7 +57,7 @@ class OrderItem {
 
         while(isset($data[sprintf(self::FORMAT_STRING, $i, "description")]))
         {
-            $items[$i] = new OrderItem(
+            $items[$i] = new PaysonApi_OrderItem(
                 $data[sprintf(self::FORMAT_STRING, $i, "description")],
                 $data[sprintf(self::FORMAT_STRING, $i, "unitPrice")],
                 $data[sprintf(self::FORMAT_STRING, $i, "quantity")],

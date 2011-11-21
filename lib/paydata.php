@@ -1,6 +1,6 @@
 <?php
 
-class PayData {
+class PaysonApi_PayData {
     // Required
     protected $returnUrl;
     protected $cancelUrl;
@@ -48,20 +48,20 @@ class PayData {
     }
 
     public function setSender($sender) {
-        if(get_class($sender) != "Sender"){
-            throw new PaysonApiException("Object not of type Sender");
+        if(get_class($sender) != "PaysonApi_Sender"){
+            throw new PaysonApi_Exception("Object not of type Sender");
         }
-        
+
         $this->sender = $sender;
     }
 
     public function setReceivers($receivers) {
         if(!is_array($receivers))
-            throw new PaysonApiException("Parameter must be an array of Receivers");
+            throw new PaysonApi_Exception("Parameter must be an array of Receivers");
 
         foreach ($receivers as $receiver){
-            if(get_class($receiver) != "Receiver")
-                throw new PaysonApiException("Parameter must be an array of Receivers");
+            if(get_class($receiver) != "PaysonApi_Receiver")
+                throw new PaysonApi_Exception("Parameter must be an array of Receivers");
         }
 
         $this->receivers = $receivers;
@@ -81,11 +81,11 @@ class PayData {
 
     public function setOrderItems($items) {
         if(!is_array($items))
-            throw new PaysonApiException("Parameter must be an array of OrderItems");
+            throw new PaysonApi_Exception("Parameter must be an array of OrderItems");
 
         foreach ($items as $item){
-            if(get_class($item) != "OrderItem")
-                throw new PaysonApiException("Parameter must be an array of OrderItems");
+            if(get_class($item) != "PaysonApi_OrderItem")
+                throw new PaysonApi_Exception("Parameter must be an array of OrderItems");
         }
 
         $this->orderItems = $items;
@@ -93,7 +93,7 @@ class PayData {
 
     public function setFundingConstraints($constraints) {
         if(!is_array($constraints))
-            throw new PaysonApiException("Parameter must be an array of funding constraints");
+            throw new PaysonApi_Exception("Parameter must be an array of funding constraints");
 
         $this->fundingConstraints = $constraints;
     }
@@ -123,22 +123,22 @@ class PayData {
         $output["memo"] = $this->memo;
 
         if(isset($this->localeCode)){
-            $output["localeCode"] = LocaleCode::ConstantToString($this->localeCode);
+            $output["localeCode"] = PaysonApi_LocaleCode::ConstantToString($this->localeCode);
         }
 
         if(isset($this->currencyCode)){
-            $output["currencyCode"] = CurrencyCode::ConstantToString($this->currencyCode);
+            $output["currencyCode"] = PaysonApi_CurrencyCode::ConstantToString($this->currencyCode);
         }
 
         $this->sender->addSenderToOutput($output);
-        Receiver::addReceiversToOutput($this->receivers, $output);
+        PaysonApi_Receiver::addReceiversToOutput($this->receivers, $output);
 
-        OrderItem::addOrderItemsToOutput($this->orderItems, $output);
+        PaysonApi_OrderItem::addOrderItemsToOutput($this->orderItems, $output);
 
         if(isset($this->fundingConstraints)) {
-            FundingConstraint::addConstraintsToOutput($this->fundingConstraints, $output);
+            PaysonApi_FundingConstraint::addConstraintsToOutput($this->fundingConstraints, $output);
 
-            if(in_array(FundingConstraint::INVOICE, $this->fundingConstraints) and
+            if(in_array(PaysonApi_FundingConstraint::INVOICE, $this->fundingConstraints) and
                 isset($this->invoiceFee))
             {
                 $output["invoiceFee"] = $this->invoiceFee;
@@ -154,11 +154,11 @@ class PayData {
         }
 
         if(isset($this->feesPayer)) {
-            $output["feesPayer"] = FeesPayer::ConstantToString($this->feesPayer);
+            $output["feesPayer"] = PaysonApi_FeesPayer::ConstantToString($this->feesPayer);
         }
 
         if(isset($this->guaranteeOffered)){
-            $output["guaranteeOffered"] = GuaranteeOffered::ConstantToString($this->guaranteeOffered);
+            $output["guaranteeOffered"] = PaysonApi_GuaranteeOffered::ConstantToString($this->guaranteeOffered);
         }
 
         return $output;
