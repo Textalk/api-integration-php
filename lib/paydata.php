@@ -119,7 +119,7 @@ class PaysonApi_PayData {
 
         $output["returnUrl"] = $this->returnUrl;
         $output["cancelUrl"] = $this->cancelUrl;
-        $output["ipnNotificationUrl"] = $this->ipnUrl;
+        if (!empty($this->ipnUrl)) $output["ipnNotificationUrl"] = $this->ipnUrl;
         $output["memo"] = $this->memo;
 
         if(isset($this->localeCode)){
