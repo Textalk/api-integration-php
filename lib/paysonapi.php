@@ -184,7 +184,7 @@ class PaysonApi {
 
         $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PayResponse($decoded);
+        return new PaysonApi_PayResponse($decoded);
     }
 
     /**
