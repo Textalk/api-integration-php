@@ -54,7 +54,7 @@ print("\nPay:\n");
 $payData = new PayData($returnUrl, $cancelUrl, $ipnUrl, "description", $sender, $receivers);
 
 // Set guarantee options
-$payData.setGuaranteeOffered(GuaranteeOffered::OPTIONAL);
+$payData->setGuaranteeOffered(GuaranteeOffered::OPTIONAL);
 
 /*
  * Step 2 initiate payment
