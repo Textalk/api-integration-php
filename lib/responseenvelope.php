@@ -21,7 +21,7 @@ class ResponseEnvelope {
 
     public function __toString() {
         return "ack: " . $this->ack . "\n" .
-               "timestamp: " . $this->timestamp . "\n" .
+               "timestamp: " . $this->timestamp . "\n";
     }
 
     private function parseErrors($output) {
