@@ -17,6 +17,12 @@ class PaymentDetails {
     protected $correlationId;
     protected $purchaseId;
     protected $senderEmail;
+    
+    protected $shippingAddressName;
+	protected $shippingAddressStreetAddress;
+	protected $shippingAddressPostalCode;
+	protected $shippingAddressCity;
+	protected $shippingAddressCountry;
 
     public function __construct($responseData) {
         $this->orderItems = OrderItem::parseOrderItems($responseData);
@@ -36,6 +42,22 @@ class PaymentDetails {
 
         if (isset($responseData["guaranteeDeadlineTimestamp"])){
             $this->guaranteeDeadlineTimestamp = $responseData["guaranteeDeadlineTimestamp"];
+        }
+        
+        if (isset($responseData["shippingAddress.name"])){
+            $this->shippingAddressName = $responseData["shippingAddress.name"];
+        }
+        if (isset($responseData["shippingAddress.streetAddress"])){
+            $this->shippingAddressStreetAddress = $responseData["shippingAddress.streetAddress"];
+        }
+        if (isset($responseData["shippingAddress.postalCode"])){
+            $this->shippingAddressPostalCode = $responseData["shippingAddress.postalCode"];
+        }
+        if (isset($responseData["shippingAddress.city"])){
+            $this->shippingAddressCity = $responseData["shippingAddress.city"];
+        }
+        if (isset($responseData["shippingAddress.country"])){
+            $this->shippingAddressCountry = $responseData["shippingAddress.country"];
         }
 
         $this->type = $responseData["type"];
@@ -172,6 +194,53 @@ class PaymentDetails {
      */
     public function getGuaranteeDeadlineTimestamp() {
         return $this->guaranteeDeadlineTimestamp;
+    }
+    
+   /**
+     * Get the name of an invoice payment
+     *
+     * @return
+     */
+    public function getShippingAddressName() {
+        return $this->shippingAddressName;
+    }
+    
+    /**
+     * Get the street address of an invoice payment
+     *
+     * @return
+     */  
+    public function getShippingAddressStreetAddress() {
+        return $this->shippingAddressStreetAddress;
+    }
+    
+    
+    
+    /**
+     * Get the postal code of an invoice payment
+     *
+     * @return
+     */
+    public function getShippingAddressPostalCode() {
+        return $this->shippingAddressPostalCode;
+    }
+    
+    /**
+     * Get the city of an invoice payment
+     *
+     * @return
+     */
+    public function getShippingAddressCity() {
+        return $this->shippingAddressCity;
+    }
+    
+    /**
+     * Get the country of an invoice payment
+     *
+     * @return
+     */
+    public function getShippingAddressCountry() {
+        return $this->shippingAddressCountry;
     }
 
     public function __toString() {
