@@ -6,6 +6,7 @@ class PaysonCredentials {
     protected $userId;
     protected $password;
     protected $applicationId;
+    protected $moduleInfo;
 
     /**
      * Sets up a PaysonCredential object
@@ -13,11 +14,13 @@ class PaysonCredentials {
      * @param  string $userId API user id 
      * @param  string $password API password
      * @param null $applicationId
+     * @param string $moduleInfo version of library
      */
-    public function __construct($userId, $password, $applicationId = null){
+    public function __construct($userId, $password, $applicationId = null, $moduleInfo = 'PaysonIntegrationPHP|1.0|NONE'){
         $this->userId = $userId;
         $this->password = $password;
         $this->applicationId = $applicationId;
+        $this->moduleInfo = $moduleInfo;
     }
 
     public function UserId(){
@@ -31,12 +34,17 @@ class PaysonCredentials {
     public function ApplicationId(){
         return $this->applicationId;
     }
+    
+	public function ModuleInfo(){
+        return $this->moduleInfo;
+    }
 
     public function toHeader(){
         return array(
-            'PAYSON-SECURITY-USERID: ' . $this->UserId(),
+            'PAYSON-SECURITY-USERID:   ' . $this->UserId(),
             'PAYSON-SECURITY-PASSWORD: ' . $this->Password(),
-            'PAYSON-APPLICATION-ID: ' . $this->ApplicationId()
+            'PAYSON-APPLICATION-ID:    ' . $this->ApplicationId(),
+        	'PAYSON-MODULE-INFO:       ' . $this->ModuleInfo()
             );
     }
 }
