@@ -15,7 +15,7 @@ ini_set("display_errors", 1);
  * from where you installed it.
  */
 
-require_once 'lib/paysonapiTest.php';
+require_once '../lib/paysonapiTest.php';
 
 /* Every interaction with Payson goes through the PaysonApi object which you set up as follows */
 $credentials = new PaysonCredentials("3", "54e5eb76-3888-4673-a5ba-be2f4187c3d5");

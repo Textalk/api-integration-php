@@ -1,5 +1,5 @@
 <?php
-require_once 'lib/paysonapiTest.php';
+require_once '../lib/paysonapiTest.php';
 
 $your_user_id = "3";
 $your_user_key = "54e5eb76-3888-4673-a5ba-be2f4187c3d5";
