@@ -143,7 +143,7 @@ class PaysonApi {
      * @param PaysonApi_Credentials $credentials
      */
     public function __construct($credentials){
-        if(get_class($credentials) != "PaysonApi_Credentials") {
+        if(get_class($credentials) != "PaysonApi_PaysonCredentials") {
             throw new PaysonApi_Exception("Parameter must be of type PaysonApi_Credentials");
         }
         $this->credentials = $credentials;

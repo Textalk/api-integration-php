@@ -30,7 +30,7 @@ class PaysonApi_PaymentUpdateMethod {
             case self::Refund:
                 return "REFUND";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_PaysonApiException("Invalid constant");
         }
     }
 }
@@ -45,7 +45,7 @@ class PaysonApi_LocaleCode {
             case "EN":
                 return "EN";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_PaysonApiException("Invalid constant");
         }
     }
 }
@@ -58,7 +58,7 @@ class PaysonApi_CurrencyCode {
             case "EUR":
                 return "EUR";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_PaysonApiException("Invalid constant");
         }
     }
 }
@@ -75,7 +75,7 @@ class PaysonApi_FeesPayer {
             case "SECONDARYONLY":
                 return "SECONDARYONLY";
             default:
-                throw new PaysonApiException("Invalid constant");
+                throw new PaysonApi_PaysonApiException("Invalid constant");
         }
     }
 }
@@ -143,8 +143,8 @@ class PaysonApi {
      * @param PaysonCredentials $credentials
      */
     public function __construct($credentials){
-        if(get_class($credentials) != "PaysonCredentials") {
-            throw new PaysonApiException("Parameter must be of type PaysonCredentials");
+        if(get_class($credentials) != "PaysonApi_PaysonCredentials") {
+            throw new PaysonApi_PaysonApiException("Parameter must be of type PaysonCredentials");
         }
         $this->credentials = $credentials;
     }
@@ -158,7 +158,7 @@ class PaysonApi {
     public function pay($payData)
     {
         $input = $payData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION_TEST, self::PAYSON_API_PAY_ACTION_TEST);
 
@@ -166,9 +166,9 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PayResponse($decoded);
+        return new PaysonApi_PayResponse($decoded);
     }
 
     /**
@@ -185,9 +185,9 @@ class PaysonApi {
                                        $this->credentials,
                                        $data);
 
-        $decoded = NVPCodec::Decode($data);
+        $decoded = PaysonApi_NVPCodec::Decode($data);
 
-        return new ValidateResponse($decoded, $returnData);
+        return new PaysonApi_ValidateResponse($decoded, $returnData);
     }
 
     /**
@@ -199,7 +199,7 @@ class PaysonApi {
     public function paymentDetails($paymentDetailsData)
     {
         $input = $paymentDetailsData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION_TEST, self::PAYSON_API_PAYMENT_DETAILS_ACTION_TEST);
 
@@ -207,9 +207,9 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PaymentDetailsResponse($decoded);
+        return new PaysonApi_PaymentDetailsResponse($decoded);
     }
 
     /**
@@ -221,7 +221,7 @@ class PaysonApi {
     public function paymentUpdate($paymentUpdateData)
     {
         $input = $paymentUpdateData->getOutput();
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
 
         $action = sprintf("/%s/%s/", self::PAYSON_API_VERSION_TEST, self::PAYSON_API_PAYMENT_UPDATE_ACTION_TEST);
 
@@ -229,14 +229,14 @@ class PaysonApi {
                                        $this->credentials,
                                        $postData);
 
-        $decoded = NVPCodec::Decode($returnData);
+        $decoded = PaysonApi_NVPCodec::Decode($returnData);
 
-        return new PaymentUpdateResponse($decoded);
+        return new PaysonApi_PaymentUpdateResponse($decoded);
     }
 
     public function sendIpn($token){
         $input["token"] = $token;
-        $postData = NVPCodec::Encode($input);
+        $postData = PaysonApi_NVPCodec::Encode($input);
         $action = "/1.0/SendIPN/";
 
         $this->doRequest($action,
@@ -261,7 +261,7 @@ class PaysonApi {
             return  $output;
 		}
 
-        throw new PaysonApiException("Curl not installed.");
+        throw new PaysonApi_PaysonApiException("Curl not installed.");
     }
 
     private function doCurlRequest($url, $credentials, $postData) {
@@ -287,7 +287,7 @@ class PaysonApi {
             return $result;
         }
         else {
-            throw new PaysonApiException("Remote host responded with HTTP response code: " . $response_code);
+            throw new PaysonApi_PaysonApiException("Remote host responded with HTTP response code: " . $response_code);
         }
     }
 }
