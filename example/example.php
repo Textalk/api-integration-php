@@ -43,18 +43,35 @@ $ipnUrl = "http://localhost/ipn.php";
 // Details about the receiver
 $receiver = new PaysonApi_Receiver(
     "<your payson account>", // The email of the account to receive the money
-    100); // The amount you want to charge the user, here in SEK (the default currency)
+    105); // The amount you want to charge the user, here in SEK (the default currency)
 $receivers = array($receiver);
 
 // Details about the user that is the sender of the money
-$sender = new PaysonApi_Sender("<sender email", "<sender firstname", "<sender lastname>");
+$sender = new PaysonApi_Sender("<sender email>", "<sender firstname>", "<sender lastname>");
 
 print("\nPay:\n");
 
 $payData = new PaysonApi_PayData($returnUrl, $cancelUrl, $ipnUrl, "description", $sender, $receivers);
 
+//Set the list of products
+//$orderItems = array(new OrderItem("Book collection", 80, 1, 0.25, "001"), new OrderItem("Shipping", 5, 1, 0.0, "002"));
+//$payData->setOrderItems($orderItems);
+
+//Set the payment method
+$constraints = array(FundingConstraint::BANK);
+$payData->setFundingConstraints($constraints);
+
+//Set the payer of Payson fees
+$payData->setFeesPayer("PRIMARYRECEIVER");
+
+// Set currency code
+$payData->setCurrencyCode("EUR");
+
+// Set locale code
+$payData->setLocaleCode("EN");
+
 // Set guarantee options
-$payData.setGuaranteeOffered(PaysonApi_GuaranteeOffered::OPTIONAL);
+$payData->setGuaranteeOffered("OPTIONAL");
 
 /*
  * Step 2 initiate payment

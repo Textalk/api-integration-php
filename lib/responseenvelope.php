@@ -3,13 +3,11 @@
 class PaysonApi_ResponseEnvelope {
     protected $ack;
     protected $timestamp;
-    protected $version;
     protected $errors;
 
     public function __construct($responseData) {
         $this->ack = $responseData["responseEnvelope.ack"];
         $this->timestamp = $responseData["responseEnvelope.timestamp"];
-        $this->version = $responseData["responseEnvelope.version"];
         $this->errors = $this->parseErrors($responseData);
     }
 
@@ -23,8 +21,7 @@ class PaysonApi_ResponseEnvelope {
 
     public function __toString() {
         return "ack: " . $this->ack . "\n" .
-               "timestamp: " . $this->timestamp . "\n" .
-               "version: " . $this->version . "\n";
+               "timestamp: " . $this->timestamp . "\n";
     }
 
     private function parseErrors($output) {

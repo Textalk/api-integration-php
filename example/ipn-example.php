@@ -19,6 +19,26 @@ if($response->isVerified()){
 
     // Check details to find out what happened with the payment
     $details = $response->getPaymentDetails();
+    
+    /* 
+    //More info
+    $response->getPaymentDetails()->getCustom();
+	$response->getPaymentDetails()->getShippingAddressName();
+	$response->getPaymentDetails()->getShippingAddressStreetAddress();
+	$response->getPaymentDetails()->getShippingAddressPostalCode();
+	$response->getPaymentDetails()->getShippingAddressCity();
+	$response->getPaymentDetails()->getShippingAddressCountry();
+	$response->getPaymentDetails()->getToken();
+	$response->getPaymentDetails()->getType();
+	$response->getPaymentDetails()->getStatus();
+	$response->getPaymentDetails()->getCurrencyCode();
+	$response->getPaymentDetails()->getTrackingId();
+	$response->getPaymentDetails()->getCorrelationId();
+	$response->getPaymentDetails()->getPurchaseId();
+	$response->getPaymentDetails()->getSenderEmail();
+	$response->getPaymentDetails()->getInvoiceStatus();
+	$response->getPaymentDetails()->getGuaranteeStatus();
+	*/
 }
 
 ?>

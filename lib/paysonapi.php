@@ -36,17 +36,13 @@ class PaysonApi_PaymentUpdateMethod {
 }
 
 class PaysonApi_LocaleCode {
-    const SV = 0;
-    const FI = 1;
-    const EN = 2;
-
     public static function ConstantToString($value){
-        switch ($value) {
-            case self::SV:
+        switch (strtoupper($value)) {
+            case "SV":
                 return "SV";
-            case self::FI:
+            case "FI":
                 return "FI";
-            case self::EN:
+            case "EN":
                 return "EN";
             default:
                 throw new PaysonApi_Exception("Invalid constant");
@@ -55,14 +51,11 @@ class PaysonApi_LocaleCode {
 }
 
 class PaysonApi_CurrencyCode {
-    const SEK = 0;
-    const EUR = 1;
-
     public static function ConstantToString($value){
-        switch ($value) {
-            case self::SEK:
+        switch (strtoupper($value)) {
+            case "SEK":
                 return "SEK";
-            case self::EUR:
+            case "EUR":
                 return "EUR";
             default:
                 throw new PaysonApi_Exception("Invalid constant");
@@ -71,20 +64,15 @@ class PaysonApi_CurrencyCode {
 }
 
 class PaysonApi_FeesPayer {
-    const SENDER = 0;
-    const PRIMARYRECEIVER = 1;
-    const EACHRECEIVER = 2;
-    const SECONDARYONLY = 3;
-
     public static function ConstantToString($value) {
-        switch ($value) {
-            case self::SENDER:
+        switch (strtoupper($value)) {
+            case "SENDER":
                 return "SENDER";
-            case self::PRIMARYRECEIVER:
+            case "PRIMARYRECEIVER":
                 return "PRIMARYRECEIVER";
-            case self::EACHRECEIVER:
+            case "EACHRECEIVER":
                 return "EACHRECEIVER";
-            case self::SECONDARYONLY:
+            case "SECONDARYONLY":
                 return "SECONDARYONLY";
             default:
                 throw new PaysonApi_Exception("Invalid constant");
@@ -123,17 +111,13 @@ class PaysonApi_FundingConstraint {
 }
 
 class PaysonApi_GuaranteeOffered {
-    const OPTIONAL = 0;
-    const REQUIRED = 1;
-    const NO = 2;
-
     public static function ConstantToString($value) {
-        switch ($value) {
-            case self::OPTIONAL:
+        switch (strtoupper($value)) {
+            case "OPTIONAL":
                 return "OPTIONAL";
-            case self::REQUIRED:
+            case "REQUIRED":
                 return "REQUIRED";
-            case self::NO:
+            case "NO":
                 return "NO";
         }
     }
