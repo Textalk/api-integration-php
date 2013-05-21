@@ -19,7 +19,7 @@ class PaysonCredentials {
      * @param null $applicationId
      * @param string $moduleInfo version of library
      */
-    public function __construct($userId, $password, $applicationId = null, $moduleInfo = 'PaysonIntegrationPHP|1.0|NONE') {
+    public function __construct($userId, $password, $applicationId = null, $moduleInfo = 'PaysonIntegrationPHP|1.1|NONE') {
         $this->userId = $userId;
         $this->password = $password;
         $this->applicationId = $applicationId;
