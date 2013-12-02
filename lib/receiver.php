@@ -52,7 +52,7 @@ class Receiver {
 					$data[sprintf(self::FORMAT_STRING, $i, "amount")]
 					);
 			if (isset($data[sprintf(self::FORMAT_STRING, $i, "primary")])){
-				$receivers[$i].SetPrimaryReceiver(strtoupper($data[sprintf(self::FORMAT_STRING, $i, "primary")]) == "TRUE" );
+				$receivers[$i]->setPrimaryReceiver(strtoupper($data[sprintf(self::FORMAT_STRING, $i, "primary")]) == "TRUE" );
 			}
             $i++;
         }
