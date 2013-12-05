@@ -19,6 +19,8 @@ class PayData {
     protected $trackingId;
     protected $guaranteeOffered;
     protected $feesPayer;
+    protected $showReceiptPage;
+    
 
     public function __construct($returnUrl, $cancelUrl, $ipnUrl, $memo, $sender, $receivers) {
         $this->setReturnUrl($returnUrl);
@@ -27,6 +29,12 @@ class PayData {
         $this->setMemo($memo);
         $this->setSender($sender);
         $this->setReceivers($receivers);
+        $this->setShowReceiptPage(true);
+    }
+    
+    /** Show a custom receipt page: True/False. Default: True */
+    public function setShowReceiptPage($flag) {
+        $this->showReceiptPage = $flag;
     }
 
     public function setReturnUrl($url) {
@@ -184,6 +192,11 @@ class PayData {
             $output["guaranteeOffered"] = GuaranteeOffered::ConstantToString($this->guaranteeOffered);
         }
 
+        
+        if (isset($this->showReceiptPage)) {
+            $output["ShowReceiptPage"] = $this->showReceiptPage ? true : false;
+        }
+        
         return $output;
     }
 
