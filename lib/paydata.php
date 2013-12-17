@@ -29,7 +29,6 @@ class PayData {
         $this->setMemo($memo);
         $this->setSender($sender);
         $this->setReceivers($receivers);
-        $this->setShowReceiptPage(true);
     }
     
     /** Show a custom receipt page: True/False. Default: True */
@@ -194,7 +193,7 @@ class PayData {
 
         
         if (isset($this->showReceiptPage)) {
-            $output["ShowReceiptPage"] = $this->showReceiptPage ? true : false;
+            $output["ShowReceiptPage"] = $this->showReceiptPage ? 'true' : 'false';
         }
         
         return $output;
