@@ -47,8 +47,9 @@ $senderFirstname = "Test";
 $senderLastname = "Person";
 
 
-/* Every interaction with Payson goes through the PaysonApi object which you set up as follows. 
- * Change TRUE to FALSE if you want to use our live environment  */
+/* Every interaction with Payson goes through the PaysonApi object which you set up as follows.  
+ * For the use of our test or live environment use one following parameters:
+ * TRUE: Use test environment, FALSE: use live environment */
 $credentials = new PaysonCredentials($agentID, $md5Key);
 $api = new PaysonApi($credentials, TRUE);
 
