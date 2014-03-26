@@ -15,7 +15,7 @@ $postData = file_get_contents("php://input");
 file_put_contents("test.txt", $postData);
 
 // Set up API
-$credentials = new PaysonApi_Credentials($agentID, $md5Key);
+$credentials = new PaysonApi_PaysonCredentials($agentID, $md5Key);
 $api = new PaysonApi($credentials, TRUE);
 
 // Validate the request

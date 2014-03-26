@@ -11,11 +11,11 @@ $md5Key = "fddb19ac-7470-42b6-a91d-072cb1495f0a";
 $token = $_GET["TOKEN"];
 
 // Initialize the API in test mode
-$credentials = new PaysonCredentials($agentID, $md5Key);
+$credentials = new PaysonApi_PaysonCredentials($agentID, $md5Key);
 $api = new PaysonApi($credentials, TRUE);
 
 // Get the details about this purchase
-$detailsResponse = $api->paymentDetails(new PaymentDetailsData($token));
+$detailsResponse = $api->paymentDetails(new PaysonApi_PaymentDetailsData($token));
 
 // First we verify that the call to payson succeeded.
 if ($detailsResponse->getResponseEnvelope()->wasSuccessful()) {
@@ -23,7 +23,7 @@ if ($detailsResponse->getResponseEnvelope()->wasSuccessful()) {
     // Get the payment details from the response
     $details = $detailsResponse->getPaymentDetails();
 
-    // If the call to Payson went well we also have to check the actual status 
+    // If the call to Payson went well we also have to check the actual status
     // of the transfer
     if ($details->getType() == "TRANSFER" && $details->getStatus() == "COMPLETED") {
         echo "Purchase has been completed <br /><h4>Details</h4><pre>" . $details . "</pre>";
@@ -51,7 +51,7 @@ if ($detailsResponse->getResponseEnvelope()->wasSuccessful()) {
       $details->getInvoiceStatus();
       $details->getGuaranteeStatus();
       $details->getReceiverFee();
-     * 
+     *
      */
 } else {
     $detailsErrors = $detailsResponse->getResponseEnvelope()->getErrors();
