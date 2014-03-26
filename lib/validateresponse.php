@@ -3,6 +3,7 @@
 require_once "paymentdetails.php";
 
 class PaysonApi_ValidateResponse {
+
     protected $response;
     protected $paymentDetails;
 
@@ -29,6 +30,7 @@ class PaysonApi_ValidateResponse {
     public function getPaymentDetails() {
         return $this->paymentDetails;
     }
+
 }
 
 ?>

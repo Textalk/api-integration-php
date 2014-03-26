@@ -1,6 +1,7 @@
 <?php
 
 class PaysonApi_PaymentUpdateData {
+
     protected $token;
     protected $method;
 
@@ -17,6 +18,7 @@ class PaysonApi_PaymentUpdateData {
 
         return $output;
     }
+
 }
 
 ?>

@@ -3,20 +3,24 @@
 require_once "responseenvelope.php";
 
 class PaysonApi_PayResponse {
+
     protected $responseEnvelope;
     protected $token;
 
     public function __construct($responseData) {
         $this->responseEnvelope = new PaysonApi_ResponseEnvelope($responseData);
 
-        if(isset($responseData["TOKEN"])){
+        if (isset($responseData["TOKEN"])) {
             $this->token = $responseData["TOKEN"];
-        }
-        else {
+        } else {
             $this->token = "";
         }
     }
 
+    /**
+     *
+     * @return type ResponseEnvelope
+     */
     public function getResponseEnvelope() {
         return $this->responseEnvelope;
     }
@@ -28,8 +32,9 @@ class PaysonApi_PayResponse {
     public function __toString() {
 
         return $this->responseEnvelope->__toString() .
-               "token: " . $this->token;
+                "token: " . $this->token;
     }
+
 }
 
 ?>

@@ -3,6 +3,7 @@
 require_once "responseenvelope.php";
 
 class PaysonApi_PaymentUpdateResponse {
+
     protected $responseEnvelope;
 
     public function __construct($responseData) {
@@ -16,7 +17,7 @@ class PaysonApi_PaymentUpdateResponse {
     public function __toString() {
         return $this->responseEnvelope->__toString();
     }
-}
 
+}
 
 ?>
