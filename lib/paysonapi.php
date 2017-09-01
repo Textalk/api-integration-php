@@ -303,7 +303,7 @@ class PaysonApi {
         $result = curl_exec($ch);
 
         if ($result === false) {
-            die('Curl error: ' . curl_error($ch));
+            throw new PaysonApi_Exception('Curl error: ' . curl_error($ch));
         }
 
         $response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
